@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class Pedometer27 implements Comparable<Pedometer27> {
 
@@ -41,5 +42,16 @@ public class Pedometer27 implements Comparable<Pedometer27> {
             }
         }
         return response;
+    }
+
+    public Map<Integer, Boolean> printAllDaysByCriteria(Predicate<Integer> criteria) {
+        HashMap<Integer, Boolean> trueSteps = new HashMap<>();
+        for  (int steps : data.keySet()) {
+            if (criteria.test(data.get(steps))) {
+                trueSteps.put(steps, true);
+                System.out.println("День " + steps + " шагов " + data.get(steps));
+            }
+        }
+        return trueSteps;
     }
 }
