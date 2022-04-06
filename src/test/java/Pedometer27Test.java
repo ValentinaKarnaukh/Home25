@@ -25,13 +25,13 @@ public class Pedometer27Test {
         Pedometer27 p2 = new Pedometer27();
 
         p1.add(1, 100);
-        p1.add(-2, 50);
+        p1.add(2, 50);
         p1.add(2, 85);
         p1.add(3, 15);
 
         p2.add(1, 80);
         p2.add(2, 45);
-        p2.add(2, -45);
+        p2.add(2, 45);
         p2.add(3, 15);
         p2.add(4, 25);
         p2.add(4, 25);
@@ -52,5 +52,29 @@ public class Pedometer27Test {
         p1.add(5, 14500);
 
         p1.printAllByCriteria(steps -> steps > 10000);
+    }
+
+    @Test
+    public void dayNegativeTest(){
+        Pedometer27 p1 = new Pedometer27();
+        Assertions.assertThrows(IllegalDayException.class,() -> {
+            p1.add(-5,4000);
+        });
+    }
+
+    @Test
+    public void positiveOverDayTest(){
+        Pedometer27 p1 = new Pedometer27();
+        Assertions.assertThrows(IllegalDayException.class,() -> {
+            p1.add(366,8000);
+        });
+    }
+
+    @Test
+    public void stepsNegativeTest(){
+        Pedometer27 p1 = new Pedometer27();
+        Assertions.assertThrows(IllegalStepsException.class,() -> {
+            p1.add(3,-800);
+        });
     }
 }

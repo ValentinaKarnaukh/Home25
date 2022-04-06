@@ -8,15 +8,17 @@ public class Pedometer27 implements Comparable<Pedometer27> {
     private int max = 0;
 
     public int add(int day, int steps) {
-        if (day <= 0 || steps < 0) {
-            return max = -1;
-        } else {
+        if (day <= 0 || day > 365) {
+            throw new IllegalDayException(day);
+        } else if (steps >= 0) {
             int valueSteps = data.getOrDefault(day, 0) + steps;
             data.put(day, valueSteps);
             if (max < valueSteps) {
                 max = valueSteps;
             }
             return max - steps + 1;
+        } else {
+            throw new IllegalStepsException(steps);
         }
     }
 
