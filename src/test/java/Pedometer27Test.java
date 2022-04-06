@@ -1,9 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Pedometer27Test {
 
     @Test
@@ -46,27 +43,14 @@ public class Pedometer27Test {
     }
 
     @Test
-    public void trueSteps () {
-        Pedometer27 pedometer = new Pedometer27();
-        pedometer.add(1, 3000);
-        pedometer.add(2, 25000);
-        pedometer.add(3, 12000);
-        pedometer.add(4, 13300);
-        pedometer.add(5, 7500);
+    public void trueSteps() {
+        Pedometer27 p1 = new Pedometer27();
+        p1.add(1, 11500);
+        p1.add(2, 18000);
+        p1.add(3, 5640);
+        p1.add(4, 9999);
+        p1.add(5, 14500);
 
-        int minSteps = 10000;
-
-        Map<Integer, Boolean> stepsExpected = new HashMap<>();
-
-        stepsExpected.put(2, true);
-        stepsExpected.put(3, true);
-        stepsExpected.put(4, true);
-
-        Map<Integer, Boolean> stepsActual = pedometer.printAllDaysByCriteria(step -> step > minSteps);
-        for (int steps : stepsActual.keySet()) {
-            System.out.println("День " + steps + " " + stepsActual.get(steps));
-        }
-
-        Assertions.assertEquals(stepsExpected, stepsActual);
+        p1.printAllByCriteria(steps -> steps > 10000);
     }
 }

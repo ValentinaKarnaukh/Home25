@@ -44,7 +44,15 @@ public class Pedometer27 implements Comparable<Pedometer27> {
         return response;
     }
 
-    public Map<Integer, Boolean> printAllDaysByCriteria(Predicate<Integer> criteria) {
+
+    public void printAllByCriteria(Predicate<Integer> predicate) {
+        for (int day : data.keySet()) {
+            if (predicate.test(data.get(day))) {
+                System.out.println("День " + day + " шагов " + data.get(day));
+            }
+        }
+    }
+    public Map<Integer, Boolean> printAllDaysByCriteria2(Predicate<Integer> criteria) {
         HashMap<Integer, Boolean> trueSteps = new HashMap<>();
         for  (int steps : data.keySet()) {
             if (criteria.test(data.get(steps))) {
